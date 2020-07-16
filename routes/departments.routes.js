@@ -63,7 +63,6 @@ router.put('/departments/:id', async (req, res) => {
 });
 
 router.delete('/departments/:id', async (req, res) => {
-  const { name } = req.body;
   try {
     const dep = await(Department.findById(req.params.id));
     if(dep) {
