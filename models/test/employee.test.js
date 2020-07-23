@@ -14,12 +14,12 @@ describe('Employee', () => {
 
   it('should throw an error if arg is not a string', () => {
     const cases = [
-      {firstName: 'John', lastName:'Doe', department: 'undefined'}, {firstName: 'John', lastName:'Doe', department: 0},
+      {firstName: 'John', lastName:'Doe', department: undefined}, 
       {firstName: 'John', lastName:'Doe', department: []},
       {firstName: 'John', lastName:'Doe', department: null},
     ];
     for(let arg of cases) {
-      const employee = new Employee({ arg });
+      const employee = new Employee( arg );
   
       employee.validate(err => {
         expect(err.errors.department).to.exist;
