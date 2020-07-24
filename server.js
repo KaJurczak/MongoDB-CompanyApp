@@ -21,8 +21,17 @@ app.use((req, res) => {
 })
 
 // connects our backend code with the database
-const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://newUser:jukajuka1@cluster0.iegdp.gcp.mongodb.net/companyDB?retryWrites=true&w=majority' : 'mongodb://localhost:27017/companyDB';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+if(process.env.NODE_ENV === 'production'){
+  mongoose.connect('mongodb+srv://newUser:jukajuka1@cluster0.iegdp.gcp.mongodb.net/companyDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+  console.log('process production');
+} else {
+  mongoose.connect('mongodb://localhost:27017/companyDB', { useNewUrlParser: true, useUnifiedTopology: true });
+  console.log('process test');
+}
+
+// const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://newUser:jukajuka1@cluster0.iegdp.gcp.mongodb.net/companyDB?retryWrites=true&w=majority' : 'mongodb://localhost:27017/companyDB';
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
